@@ -2,32 +2,54 @@
 #include <windows.h>
 #include <cstdlib>
 #include <time.h>
+#include <conio.h>
+#include <fstream>
 
 using namespace std;
 
+void clearScreen()
+{
+    ifstream fin ("dungeonGame.txt");
+    char ascii;
+
+    if (system("CLS")) system("clear");
+
+    while(fin >> noskipws >> ascii)
+    {
+        cout << ascii;
+    }
+
+}
+
 int main()
 {
-    srand (time(NULL));
+    /*srand (time(NULL));
     int v1;
-    v1 = rand() % 100;
+    v1 = rand() % 100;*/
 
 
-
+    char option;
     string playerName, startOption, option1;
     int playerHP = 100, bossHP = 175;
     int hpLost = 5, damageGiven = 5, hpHealed = 10;
     bool bossDead = false, playerDead = false;
     bool bossDecision = true; ///false == heal --- true == attack
-    cout << v1 << endl;
+
+
     cout << "Enter your name to continue: ";
     cin >> playerName;
-    cout << "Welcome to game, " << playerName << "!" << endl;
+
+    clearScreen();
+
+    cout << endl << "Welcome, " << playerName << "!" << endl << endl;
     while(true)
     {
-        cout << "Type 'START' to start the game, and 'TUTORIAL' to start the tutorial!" << endl;
-        cin >> startOption;
-        if (startOption == "START")
+        cout << "    Press '1' to start the game" << endl << "    Press '2' to start the tutorial" << endl << "    Press '3' for credits!" << endl;
+        option = getch();
+
+        if (option == '1') /// game start
         {
+            clearScreen();
             cout << endl << endl;
             cout << "Boss: You will never defeat me!" << endl << endl;
             while(bossDead == false && playerDead == false)
@@ -57,17 +79,27 @@ int main()
             }
 
         }
-        else if(startOption == "TUTORIAL")
+
+        else if(option == '2') /// start tutorial
         {
-            cout << "Hello " << playerName << "!" << endl;
+            clearScreen();
+            cout << endl << "Hello " << playerName << "!" << endl;
             cout << "I will teach you the basics of game!" << endl << endl;
             cout << "In boss game, you will fight a boss. He can attack you, or heal himself." << endl;
         }
+
+        else if(option == '3')
+        {
+            clearScreen();
+            cout << "==MADE BY:==" << endl << "@Stefan360 & @victor-exe" << endl;
+        }
+
+
+
         else
         {
+            clearScreen();
             cout << "Invalid command." << endl;
-            cout << "Type 'START' to start the game, and 'TUTORIAL' to start the tutorial!" << endl;
-            cin >> startOption;
         }
     }
 
