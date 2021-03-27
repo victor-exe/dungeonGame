@@ -51,7 +51,7 @@ int main()
             while(playerHP != 0 && bossHP != 0)
             {
                 ///boss decides
-                bossDecision();
+                bossDecisionInt = 1;
                 
                 if(bossDecisionInt == 1)
                 {
