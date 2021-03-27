@@ -23,15 +23,11 @@ void clearScreen()
 
 int main()
 {
-    /*srand (time(NULL));
-    int v1;
-    v1 = rand() % 100;*/
-
 
     char option;
     string playerName, startOption, option1;
     int playerHP = 150, bossHP = 165;
-    bool bossDecisionBool = true; ///false == heal --- true == attack
+    int bossDecisionInt; ///false == heal --- true == attack
 
 
     cout << "Enter your name to continue: ";
@@ -56,8 +52,8 @@ int main()
             {
                 ///boss decides
                 bossDecision();
-                bossDecisionBool = true;
-                if(bossDecisionBool == true)
+                
+                if(bossDecisionInt == 1)
                 {
                     damageToPlayer(playerHP);
                     cout << "Boss attacked you!" << endl;
