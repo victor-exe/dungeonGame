@@ -1,11 +1,12 @@
 #include <iostream>
-#include <windows.h>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <conio.h>
 #include <fstream>
 
 using namespace std;
+
 
 void clearScreen()
 {
@@ -18,6 +19,30 @@ void clearScreen()
     {
         cout << ascii;
     }
+
+}
+
+int healPlayer(int playerHp)
+{
+    srand (time(NULL));
+    int hpHealedp = rand() % (50 - 35 + 1) + 35;
+    playerHp = playerHp + hpHealedp;
+    return playerHp;
+}
+int healBoss(int bossHp)
+{
+    srand (time(NULL));
+    int hpHealedb = rand() % (55 - 35 + 1) + 35;
+    bossHp = bossHp + hpHealedb;
+    return bossHp;
+}
+int damageToBoss(int bossHp)
+{
+
+
+}
+int damageToPlayer(int playerHp)
+{
 
 }
 
@@ -181,7 +206,3 @@ int main()
             cout << endl << endl << "Invalid command." << endl;
         }
     }
-
-
-    return 0;
-}
