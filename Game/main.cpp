@@ -30,10 +30,8 @@ int main()
 
     char option;
     string playerName, startOption, option1;
-    int playerHP = 100, bossHP = 175;
-    int hpLost = 5, damageGiven = 5, hpHealed = 10;
-    bool bossDead = false, playerDead = false;
-    bool bossDecision = true; ///false == heal --- true == attack
+    int playerHP = 150, bossHP = 165;
+    bool bossDecisionBool = true; ///false == heal --- true == attack
 
 
     cout << "Enter your name to continue: ";
@@ -43,6 +41,7 @@ int main()
 
     while(true)
     {
+        clearScreen();
         cout << endl << "Welcome, " << playerName << "!" << endl << endl;
         cout << "    Press '1' to start the game" << endl << "    Press '2' to start the tutorial" << endl << "    Press '3' for credits!" << endl;
         option = getch();
@@ -50,32 +49,58 @@ int main()
         if (option == '1') /// game start
         {
             clearScreen();
-            cout << endl << endl;
+            cout << endl;
             cout << "Boss: You will never defeat me!" << endl << endl;
-            while(bossDead == false && playerDead == false)
+
+            while(playerHP != 0 && bossHP != 0)
             {
                 ///boss decides
-                if(bossDecision == true)
+                bossDecision();
+                bossDecisionBool = true;
+                if(bossDecisionBool == true)
                 {
-                    cout << "Boss attacked you!" << endl << "You lost " << hpLost << "HP!" << endl;
-                    playerHP -= hpLost;
+                    damageToPlayer(playerHP);
+                    cout << "Boss attacked you!" << endl;
                     cout << "You now have " << playerHP << "HP!" << endl;
                 }
                 else
                 {
+                    healBoss(bossHP);
                     cout << "Boss healed!" << endl;
                 }
-                cout << "Attack or heal?" << endl;
-                cin >> option1;
-                if(option1 == "ATTACK")
+
+                cout << "-------";
+
+                cout << endl << "ATTACK OR HEAL?" << endl;
+                option = getch();
+                clearScreen();
+                if(option == 'e' || option == 'E')
                 {
-                    cout << "You attacked boss." << endl;
-                    cout << "You gave " << damageGiven << " damage to boss.";
+                    damageToBoss(bossHP);
+                    cout << endl << "You attacked boss." << endl;
+                    cout << "Boss is now on " << bossHP << " HP." << endl;
                 }
-                else if(option1 == "HEAL")
+                else if(option == 'q' || option == 'Q')
                 {
-                    cout << "You drank a potion and it gave you " << hpHealed << "HP." << endl;
+                    healPlayer(playerHP);
+                    cout << endl << "You drank a potion of healing. " << endl;
+                    cout << "You are now on " << playerHP << " HP." << endl;
                 }
+                cout << "-------" << endl;
+            }
+            if (bossHP == 0)
+            {
+                cout << "Boss died." << endl;
+                cout << "You win!" << endl << endl;
+                cout << "(press anything to go back to the main menu)" << endl;
+                option = getch();
+            }
+            else
+            {
+                cout << "You died." << endl;
+                cout << "You lost!" << endl << endl;
+                cout << "(press anything to go back to the main menu)" << endl;
+                option = getch();
             }
 
         }
